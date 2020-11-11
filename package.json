@@ -3,9 +3,25 @@
   "version": "1.0.0",
   "description": "cli.",
   "main": "index.js",
-  "scripts": {},
-  "dependencies": {},
-  "devDependencies": {},
+  "scripts": {
+    "dotlim-cli": "bin/www"
+  },
+  "bin": {
+    "dotlim-cli": "bin/www"
+  },
+  "dependencies": {
+    "axios": "^0.21.0",
+    "commander": "^6.2.0",
+    "download-git-repo": "^3.0.2",
+    "fs-extra": "^9.0.1",
+    "inquirer": "^7.3.3",
+    "ncp": "^2.0.0",
+    "ora": "^5.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.13.0",
+    "husky": "^4.3.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dotlim/dotlim-cli.git"
