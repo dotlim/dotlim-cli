@@ -1,0 +1,22 @@
+{
+  "name": "@dotlim/cli",
+  "version": "1.0.0",
+  "description": "cli.",
+  "main": "index.js",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dotlim/dotlim-cli.git"
+  },
+  "keywords": [
+    "cli"
+  ],
+  "author": "oxyzhg@163.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dotlim/dotlim-cli/issues"
+  },
+  "homepage": "https://github.com/dotlim/dotlim-cli#readme"
+}
