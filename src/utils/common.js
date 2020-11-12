@@ -11,7 +11,7 @@ downloadGit = promisify(downloadGit);
 ncp = promisify(ncp);
 
 // execute async function with loading
-async function createOraLoading(fn, message) {
+async function execWithOraLoading(fn, message) {
   console.log('\n');
   const spinner = ora(message);
   spinner.start();
@@ -62,7 +62,7 @@ async function copyTemplateToDir(target, projectName) {
 }
 
 module.exports = {
-  createOraLoading,
+  execWithOraLoading,
   fetchRepoInfo,
   cloneRepo,
   copyTemplateToDir,
