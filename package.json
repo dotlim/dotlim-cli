@@ -4,10 +4,10 @@
   "description": "cli.",
   "main": "index.js",
   "scripts": {
-    "dotlim-cli": "bin/www"
+    "dotlim": "bin/www"
   },
   "bin": {
-    "dotlim-cli": "bin/www"
+    "dotlim": "bin/www"
   },
   "dependencies": {
     "axios": "^0.21.0",

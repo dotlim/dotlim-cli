@@ -51,7 +51,11 @@ async function cloneRepo(repo = defaultRepo) {
 
 // copy template to target directory
 async function copyTemplateToDir(target, projectName) {
-  const resolvedPath = path.join(__dirname, projectName);
+  const resolvedPath = path.join(path.resolve(), projectName);
+
+  console.log(resolvedPath);
+
+  // 目录是否已存在
 
   if (!fse.existsSync(path.join(target, 'ask.js'))) {
     await ncp(target, resolvedPath);

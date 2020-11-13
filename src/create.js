@@ -31,4 +31,5 @@ module.exports = async (projectName) => {
   const dest = await execWithOraLoading(cloneRepo, 'Clone remote repo...');
 
   // TODO: copy
+  copyTemplateToDir(dest, projectName)
 };
