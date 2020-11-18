@@ -1,25 +1,26 @@
+const path = require('path');
 const { name, version } = require('../../package.json');
 
-// 定义命令
+// defined commands
 const mapActions = {
   create: {
+    command: 'create',
     alias: 'c',
-    description: 'Create a project with default template',
-    examples: [
-      'dotlim-cli create <project-name>'
-    ],
+    description: 'create a new project with default template',
+    examples: ['dotlim create <project-name>'],
   },
   config: {
+    command: 'config',
     alias: 'conf',
     description: 'Config project variables',
-    examples: [
-      'dotlim-cli config set <key> <value>',
-      'dotlim-cli config set <key>',
-    ],
+    examples: ['dotlim config set <key> <value>', 'dotlim config set <key>'],
   },
 };
 
-const downloadDirectory = `${process.env[process.platform === 'darwin' ? 'HOME' : 'USERPROFILE']}/.dotlim-template`;
+const downloadDirectory = path.join(
+  process.env[process.platform === 'darwin' ? 'HOME' : 'USERPROFILE'],
+  '.dotlim-template'
+);
 
 module.exports = {
   name,

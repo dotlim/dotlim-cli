@@ -11,7 +11,7 @@ downloadGit = promisify(downloadGit);
 ncp = promisify(ncp);
 
 // execute async function with loading
-async function execWithOraLoading(fn, message) {
+async function initSpinner(fn, message) {
   console.log('\n');
   const spinner = ora(message);
   spinner.start();
@@ -32,8 +32,10 @@ async function fetchRepoInfo(repo = defaultRepo) {
 
 // clone remote repo to lcoal
 async function cloneRepo(repo = defaultRepo) {
-  const project = `github:dotlim/${repo}#${defaultBranch}`;
-  const dest = `${downloadDirectory}/${repo}`;
+  // const project = `github:dotlim/${repo}#${defaultBranch}`;
+  // const project = `direct:https://gitlab.gridsum.com/Moebius/frontend-tech/moebius-plugin-template.git`;
+  const project = `direct:git@gitlab.gridsum.com:Moebius/frontend-tech/moebius-plugin-template.git#master`;
+  const dest = path.join(downloadDirectory, repo);
 
   console.log('\n====================================');
   console.log('project:', project);
@@ -41,7 +43,7 @@ async function cloneRepo(repo = defaultRepo) {
   console.log('====================================');
 
   try {
-    await downloadGit(project, dest);
+    await downloadGit(project, dest, { clone: true });
   } catch (err) {
     console.log('\n\nerror', err);
   }
@@ -50,7 +52,7 @@ async function cloneRepo(repo = defaultRepo) {
 }
 
 // copy template to target directory
-async function copyTemplateToDir(target, projectName) {
+async function copyTemplateFields(target, projectName) {
   const resolvedPath = path.join(path.resolve(), projectName);
 
   console.log(resolvedPath);
@@ -66,8 +68,8 @@ async function copyTemplateToDir(target, projectName) {
 }
 
 module.exports = {
-  execWithOraLoading,
+  initSpinner,
   fetchRepoInfo,
   cloneRepo,
-  copyTemplateToDir,
+  copyTemplateFields,
 };
