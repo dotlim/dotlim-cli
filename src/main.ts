@@ -9,7 +9,7 @@ program
   .description('init a new project with default templates')
   .option('-f, --force', 'force all the question')
   .action((dir, payload) => {
-    console.log(dir, payload.options);
+    // console.log(dir, payload.options);
     new CreateCommand(dir, payload);
   });
 
