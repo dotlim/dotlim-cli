@@ -24,7 +24,7 @@ program
   .option('-f, --force', 'force all the question')
   .action((dir, payload) => {
     // console.log(dir, payload.options);
-    require('./create')(dir, payload);
+    require('./command/create')(dir, payload);
     // console.log(process.argv);
   });
 
