@@ -8,6 +8,6 @@
 
 - 实现可以在命令行中直接运行代码
 - 实现可以用 npm 安装 `npm install dotlim-cli -g`
-- 根据模板初始化项目 `dotlim-cli create project-name`
+- 根据模板初始化项目 `dotlim init project-name`
 - 模板库代码拉取
-- 初始化配置文件 `dotlim-cli config set repo repo-name`
+- 初始化配置文件 `dotlim config set repo repo-name`
