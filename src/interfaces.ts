@@ -22,3 +22,9 @@ export interface Cmd {
 export interface ParsedParams {
   [key: string]: boolean | number | string;
 }
+
+// git user
+export interface GitUser {
+  name: string;
+  email: string;
+}

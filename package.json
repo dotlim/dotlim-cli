@@ -1,8 +1,8 @@
 {
   "name": "@dotlim/cli",
   "version": "1.0.0",
-  "description": "cli.",
-  "main": "index.js",
+  "description": "前端工程化项目CLI工具",
+  "main": "lib/index.js",
   "scripts": {
     "build": "tsc"
   },

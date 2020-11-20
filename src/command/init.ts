@@ -8,7 +8,7 @@ import downloadGitRepo from 'download-git-repo';
 
 import { pluginDirectory } from '../constants';
 import { parseCmdParams, copyFiles, runCmd } from '../shared/utils';
-import type { Cmd, ParsedParams } from '../interfaces';
+import type { Cmd, ParsedParams, GitUser } from '../interfaces';
 
 const downloadGit = promisify(downloadGitRepo);
 const definedInquirer = {
@@ -46,18 +46,23 @@ const definedInquirer = {
       message: '请输入新的项目名称',
     },
   ],
-  description: [
+  packageJson: (name: string, user: GitUser) => [
+    {
+      type: 'input',
+      name: 'projectName',
+      message: '请输入插件名称',
+      default: name,
+    },
     {
       type: 'input',
       name: 'description',
       message: '请输入插件描述',
     },
-  ],
-  author: [
     {
       type: 'input',
       name: 'author',
       message: '请输入插件开发者邮箱',
+      default: `${user.name} <${user.email}>`,
     },
   ],
 };
@@ -174,12 +179,16 @@ export class CreateCommand {
 
   // 更新 package.json
   private async updatePackageJson() {
+    const gitPrifiles = await this.getGitUser();
+    const { projectName, description, author } = await inquirer.prompt(
+      definedInquirer.packageJson(this.source, gitPrifiles)
+    );
+
     const pkgPath = path.resolve(this.repoMaps.target, 'package.json');
     const spinner = ora('Updating package.json...');
     spinner.start();
     // Define the fields to be removed
     const unnecessaryKeys = ['keywords', 'licence', 'files'];
-    const { name = '', email = '' } = await this.getGitUser();
     // read package.json
     const pkgData = fse.readJsonSync(pkgPath);
     for (let key of unnecessaryKeys) {
@@ -187,10 +196,11 @@ export class CreateCommand {
     }
 
     Object.assign(pkgData, {
-      name: this.source,
+      name: projectName,
+      description: description,
       version: '1.0.0',
       private: true,
-      author: `${name} <${email}>`,
+      author: author,
     });
 
     fse.writeJsonSync(pkgPath, pkgData, { spaces: 2 });
@@ -231,7 +241,7 @@ export class CreateCommand {
   }
 
   // 获取本地 Git 用户信息
-  private getGitUser(): Promise<{ [key: string]: string }> {
+  private getGitUser(): Promise<GitUser> {
     return new Promise(async (resolve, reject) => {
       const user = {
         name: '',
