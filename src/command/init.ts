@@ -124,7 +124,7 @@ export class CreateCommand {
 
       if (this.cmdParams.force) {
         fse.removeSync(target);
-        resolve();
+        return resolve();
       }
 
       try {
@@ -140,6 +140,7 @@ export class CreateCommand {
           const { rename } = await inquirer.prompt(definedInquirer.rename);
           this.source = rename;
           this.genTargetPath(rename);
+          await this.checkFolderExist();
           return resolve();
         } else {
           process.exit(1);
