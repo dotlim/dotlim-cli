@@ -7,7 +7,7 @@
     "build": "tsc"
   },
   "bin": {
-    "dotlim": "bin/www"
+    "dotlim": "bin/dotlim.js"
   },
   "dependencies": {
     "axios": "^0.21.0",
