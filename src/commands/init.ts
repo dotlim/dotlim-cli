@@ -83,7 +83,7 @@ export default class CreateCommand {
     this.repoMaps = {
       target: '',
       templatePath: '',
-      repository: 'dotlim-cli',
+      repository: 'cli-boilerplate',
       branch: 'main',
     };
 
@@ -119,7 +119,7 @@ export default class CreateCommand {
 
   // 检查目标路径文件是否正确
   private checkFolderExist() {
-    return new Promise(async (resolve) => {
+    return new Promise<void>(async (resolve) => {
       const { target } = this.repoMaps;
 
       if (this.cmdParams.force) {
@@ -146,7 +146,7 @@ export default class CreateCommand {
           process.exit(1);
         }
       } catch (err) {
-        console.log(chalk.red(`[dotlim] ${err}`));
+        console.log(chalk.red(`[dotlim init] ${err}`));
         process.exit(1);
       }
     });
@@ -155,7 +155,6 @@ export default class CreateCommand {
   // 拉取远程仓库的项目模板
   private async downloadRepo() {
     const { repository, branch, templatePath } = this.repoMaps;
-    // const remoteRepo = `direct:git@gitlab.gridsum.com:Moebius/frontend-tech/moebius-plugin-template.git`;
     const remotePath = `github:dotlim/${repository}#${branch}`;
     const spinner = ora('Downloading the project template...');
 
@@ -166,7 +165,7 @@ export default class CreateCommand {
       await downloadGit(remotePath, templatePath, { clone: true });
       spinner.succeed('Successfully downloaded template.');
     } catch (err) {
-      console.log(chalk.red(`[dotlim] ${err}`));
+      console.log(chalk.red(`[dotlim init] ${err}`));
       process.exit(1);
     }
   }
@@ -188,7 +187,7 @@ export default class CreateCommand {
     const pkgPath = path.resolve(this.repoMaps.target, 'package.json');
     const spinner = ora('Updating package.json...');
     spinner.start();
-    // Define the fields to be removed
+    // define the fields to be removed
     const unnecessaryKeys = ['keywords', 'licence', 'files'];
     // read package.json
     const pkgData = fse.readJsonSync(pkgPath);
@@ -235,8 +234,7 @@ export default class CreateCommand {
       // await runCmd(`git add . && git commit -m "initial project"`);
       spinner.succeed(`Successfully created project ${this.source}.`);
     } catch (err) {
-      console.log(chalk.red(`[dotlim] ${err}`));
-
+      console.log(chalk.red(`[dotlim init] ${err}`));
       process.exit(1);
     }
   }
@@ -255,7 +253,7 @@ export default class CreateCommand {
         if (name) user.name = name.replace(/\n/, '');
         if (email) user.email = email.replace(/\n/, '');
       } catch (err) {
-        console.log(chalk.red(`[dotlim] ${err}`));
+        console.log(chalk.red(`[dotlim init] ${err}`));
         reject(err);
       } finally {
         resolve(user);

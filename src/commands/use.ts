@@ -50,7 +50,7 @@ export default class UseCommand {
       if (lint.includes('prettier')) await this.usePrettier();
       if (lint.includes('husky')) await this.useHusky();
     } catch (err) {
-      console.log(chalk.red(`[mox] ${err}`));
+      console.log(chalk.red(`[dotlim use] ${err}`));
       process.exit(1);
     }
   }
