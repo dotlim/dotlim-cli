@@ -1,16 +1,24 @@
 import program from 'commander';
-import { CreateCommand } from './command/init';
+import CreateCommand from './commands/init';
+import UseCommand from './commands/use';
 
 import { pkgJson } from './constants';
 
 program
   .command('init <dir>')
   .alias('i')
-  .description('init a new project with default templates')
+  .description('init a new project with templates')
   .option('-f, --force', 'force all the question')
   .action((dir, payload) => {
-    // console.log(dir, payload.options);
     new CreateCommand(dir, payload);
+  });
+
+program
+  .command('use <feature>')
+  .description('use some features for your project')
+  .option('-f, --force', 'force all the question')
+  .action((feature, payload) => {
+    new UseCommand(feature, payload);
   });
 
 program

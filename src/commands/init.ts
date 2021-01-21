@@ -67,7 +67,7 @@ const definedInquirer = {
   ],
 };
 
-export class CreateCommand {
+export default class CreateCommand {
   source: string;
   cmdParams: ParsedParams;
   repoMaps: {
